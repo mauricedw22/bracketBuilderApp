@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html data-ng-app="bracketApp">
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<style>
+
+html{
+
+
+
+}
+
+body{
+
+text-align:center;
+
+}
+
+h2{
+
+
+}
+
+table tr{
+
+border-right:1px solid #DDD;
+color: blue;
+text-decoration: underline;
+
+}
+
+.champion{
+
+border: 3px outset gray;
+
+}
+
+#theChamp, .heads{
+
+font-family: 'Righteous';
+
+}
+
+#champs, #losers{
+
+font-family: 'Passion One';
+font-size: 2em;
+color:red;
+text-shadow: 5px 5px 7px orange;
+
+}
+
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Google's Angular CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script> 
+
+<!-- Angularjs.org Routing CDN -->
+<script src="http://code.angularjs.org/1.2.1/angular-route.min.js"></script>
+
+<!-- Angular App Module, Routes & Controllers -->
+
+<script src="modules/bracketModule.js"></script>
+
+<script src="routes/bracketRoute.js"></script>
+
+<script src="controllers/bracket4CTRL.js"></script>
+
+</head>
+
+<body data-ng-controller="bracket4CTRL">
+
+<div class="container">
+
+  <h2 style="color:green;font-family:'Righteous'">Designate Your Teams or Players!</h2>
+  
+  <br />
+
+  <div class="row">
+       
+   <div class="col-sm-6">
+   
+     <input data-ng-model="player1" class="form-control" type="text" placeholder="#1 SEED">
+	 <input data-ng-model="player3" class="form-control" type="text" placeholder="#3 SEED">
+   
+   </div>
+   
+   <div class="col-sm-6">
+   
+     <input data-ng-model="player2" class="form-control" type="text" placeholder="#2 SEED">
+	 <input data-ng-model="player4" class="form-control" type="text" placeholder="#4 SEED">
+   
+   </div>
+  
+  </div>
+  
+  <br /><Br />
+  
+  <div class="row">
+  
+    <div class="col-sm-12">
+	
+	  <button class="btn btn-warning" type="button" data-ng-click="clear()">Clear Team Data</button>
+	  &nbsp&nbsp&nbsp&nbsp&nbsp
+	  <button id="bracketMake" class="btn btn-success" type="button" data-ng-click="bracket()">Generate 4-Man Bracket</button>
+	
+	</div>
+  
+  </div>
+  
+  <br /><Br />
+  
+  <hr />
+  
+  <br />
+
+  <div data-ng-hide="showBracket" class="row">
+  
+   <div class="col-sm-2 champion" style="position:relative;top:100px;">
+   
+    <h2 id="theChamp" style="color:silver;">3rd Place</h2>
+	
+	<span id="losers"> {{ runnerup }} </span>
+   
+    <hr />
+
+   </div>     
+  
+   <div class="col-sm-2">
+   
+    <h2 class="heads" style="color:#60D7A9">Losers</h2>
+	
+	<br /><Br />
+   
+    <table class="table table-hover">
+    
+	  <tr style="border-right:none;border-left: 1px solid #DDD;">
+	    <td data-ng-click="loser1wins()"> {{ loser1 }}</td>
+	  </tr>
+	  
+	  <tr style="border-right:none;border-left: 1px solid #DDD;border-bottom:1px solid #DDD">
+	    <td data-ng-click="loser2wins()"> {{ loser2 }}</td>
+	  </tr>
+
+    </table>
+
+   </div> 
+   
+   <div class="col-sm-4">
+    
+	<h2 class="heads" style="color:#FDC162">First Round</h2>
+   
+    <table class="table table-hover">
+    
+	  <tr>
+	    <td data-ng-click="player1wins()">#1 {{ player1 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player4wins()">#4 {{ player4 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player3wins()">#3 {{ player3 }}</td>
+	  </tr>
+	  
+	  <tr style="border-bottom:1px solid #DDD">
+	    <td data-ng-click="player2wins()">#2 {{ player2 }}</td>
+	  </tr>
+
+    </table>
+
+   </div> 
+
+   <div class="col-sm-2">
+   
+    <h2 class="heads" style="color:#FD6A62">Championship</h2>
+	
+	<br /><Br />
+   
+    <table class="table table-hover">
+    
+	  <tr>
+	    <td data-ng-click="finalist1wins()"> {{ finalist1 }}</td>
+	  </tr>
+	  
+	  <tr style="border-bottom:1px solid #DDD">
+	    <td data-ng-click="finalist2wins()"> {{ finalist2 }}</td>
+	  </tr>
+
+    </table>
+
+   </div> 
+
+   <br /><br /><Br /><Br /><Br />
+
+   <div class="col-sm-2 champion">
+   
+    <h2 id="theChamp" style="color:gold;">CHAMPION</h2>
+	
+	<span id="champs"> {{ realChampion }} </span>
+   
+    <hr />
+
+   </div>     
+	
+  </div>
+  
+</div>
+
+<br />
+
+<span style="color:green;font-style:italic;">{{ matchStatus }}</span>
+<Br /><br /><Br /><Br />
+
+</body>
+</html>

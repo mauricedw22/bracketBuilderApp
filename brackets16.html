@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html data-ng-app="bracketApp">
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<style>
+
+html{
+
+
+
+}
+
+body{
+
+text-align:center;
+
+}
+
+h2{
+
+
+}
+
+table tr{
+
+border-right:1px solid #DDD;
+color: blue;
+text-decoration: underline;
+
+}
+
+.champion{
+
+border: 3px outset gray;
+
+}
+
+#theChamp, .heads{
+
+font-family: 'Righteous';
+
+}
+
+#champs{
+
+font-family: 'Passion One';
+font-size: 2em;
+color:red;
+text-shadow: 5px 5px 7px orange;
+
+}
+
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Google's Angular CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script> 
+
+<!-- Angularjs.org Routing CDN -->
+<script src="http://code.angularjs.org/1.2.1/angular-route.min.js"></script>
+
+<!-- Angular App Module, Routes & Controllers -->
+
+<script src="modules/bracketModule.js"></script>
+
+<script src="routes/bracketRoute.js"></script>
+
+<script src="controllers/bracket16CTRL.js"></script>
+
+</head>
+
+<body data-ng-controller="bracket16CTRL">
+
+<div class="container">
+
+  <h2 style="color:green;font-family:'Righteous'">Designate Your Teams or Players!</h2>
+  
+  <br />
+
+  <div class="row">
+       
+   <div class="col-sm-3">
+   
+     <input data-ng-model="player1" class="form-control" type="text" placeholder="#1 SEED">
+	 <input data-ng-model="player5" class="form-control" type="text" placeholder="#5 SEED">
+	 <input data-ng-model="player9" class="form-control" type="text" placeholder="#9 SEED">
+	 <input data-ng-model="player13" class="form-control" type="text" placeholder="#13 SEED">
+   
+   </div>
+   
+   <div class="col-sm-3">
+   
+     <input data-ng-model="player2" class="form-control" type="text" placeholder="#2 SEED">
+	 <input data-ng-model="player6" class="form-control" type="text" placeholder="#6 SEED">
+	 <input data-ng-model="player10" class="form-control" type="text" placeholder="#10 SEED">
+	 <input data-ng-model="player14" class="form-control" type="text" placeholder="#14 SEED">
+   
+   </div>
+   
+   <div class="col-sm-3">
+   
+     <input data-ng-model="player3" class="form-control" type="text" placeholder="#3 SEED">
+	 <input data-ng-model="player7" class="form-control" type="text" placeholder="#7 SEED">
+	 <input data-ng-model="player11" class="form-control" type="text" placeholder="#11 SEED">
+	 <input data-ng-model="player15" class="form-control" type="text" placeholder="#15 SEED">
+   
+   </div>
+   
+   <div class="col-sm-3">
+   
+     <input data-ng-model="player4" class="form-control" type="text" placeholder="#4 SEED">
+	 <input data-ng-model="player8" class="form-control" type="text" placeholder="#8 SEED">
+	 <input data-ng-model="player12" class="form-control" type="text" placeholder="#12 SEED">
+	 <input data-ng-model="player16" class="form-control" type="text" placeholder="#16 SEED">
+   
+   </div>	 
+  
+  </div>
+  
+  <br /><Br />
+  
+  <div class="row">
+  
+    <div class="col-sm-12">
+	
+	  <button class="btn btn-warning" type="button" data-ng-click="clear()">Clear Team Data</button>
+	  &nbsp&nbsp&nbsp&nbsp&nbsp
+	  <button id="bracketMake" class="btn btn-success" type="button" data-ng-click="bracket()">Generate 16-Man Bracket</button>
+	
+	</div>
+  
+  </div>
+  
+  <br /><Br />
+  
+  <hr />
+  
+  <br />
+
+  <div data-ng-hide="showBracket" class="row">
+   
+   <div class="col-sm-3">
+    
+	<h2 class="heads" style="color:#FDC162">First Round</h2>
+   
+    <table class="table table-hover">
+    
+	  <tr>
+	    <td data-ng-click="player1wins()">#1 {{ player1 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player16wins()">#16 {{ player16 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player9wins()">#9 {{ player9 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player8wins()">#8 {{ player8 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player5wins()">#5 {{ player5 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player12wins()">#12 {{ player12 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player13wins()">#13 {{ player13 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player4wins()">#4 {{ player4 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player3wins()">#3 {{ player3 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player14wins()">#14 {{ player14 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player11wins()">#11 {{ player11 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player6wins()">#6 {{ player6 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player7wins()">#7 {{ player7 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player10wins()">#6 {{ player10 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="player15wins()">#15 {{ player15 }}</td>
+	  </tr>
+	  
+	  <tr style="border-bottom:1px solid #DDD">
+	    <td data-ng-click="player2wins()">#2 {{ player2 }}</td>
+	  </tr>
+
+    </table>
+
+   </div> 
+
+   <div class="col-sm-2">
+   
+    <h2 class="heads" style="color:#FD6A62">Quarterfinals</h2>
+	
+	<br /><Br /><br /><Br /><br /><Br /><br />
+   
+    <table class="table table-hover">
+    
+	  <tr>
+	    <td data-ng-click="winner1wins()"> {{ winner1 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="winner2wins()"> {{ winner2 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="winner3wins()"> {{ winner3 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="winner4wins()"> {{ winner4 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="winner5wins()"> {{ winner5 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="winner6wins()"> {{ winner6 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="winner7wins()"> {{ winner7 }}</td>
+	  </tr>
+	  
+	  <tr style="border-bottom:1px solid #DDD">
+	    <td data-ng-click="winner8wins()"> {{ winner8 }}</td>
+	  </tr>
+
+    </table>
+
+   </div> 
+
+  <div class="col-sm-2">
+  
+  <h2 class="heads" style="color:#60D7A9">Semifinals</h2>
+  
+  <br /><br /><Br /><Br /><Br /><br /><Br /><br /><Br /><br /><br />
+   
+    <table class="table table-hover">
+    
+	  <tr>
+	    <td data-ng-click="semifinalist1wins()">{{ semifinalist1 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="semifinalist2wins()">{{ semifinalist2 }}</td>
+	  </tr>
+	  
+	  <tr>
+	    <td data-ng-click="semifinalist3wins()">{{ semifinalist3 }}</td>
+	  </tr>
+	  
+	  <tr style="border-bottom:1px solid #DDD">
+	    <td data-ng-click="semifinalist4wins()">{{ semifinalist4 }}</td>
+	  </tr>	  
+
+    </table>
+
+   </div> 
+
+   <div class="col-sm-3">
+  
+  <h2 class="heads" style="color:#0AC2D2">Championship</h2>
+  
+  <br /><br /><Br /><Br /><Br /><br /><Br /><br /><br /><Br /><br /><Br /><br />
+   
+    <table class="table table-hover">
+    
+	  <tr>
+	    <td data-ng-click="finalist1wins()">{{ finalist1 }}</td>
+	  </tr>
+	  	  
+	  <tr style="border-bottom:1px solid #DDD">
+	    <td data-ng-click="finalist2wins()">{{ finalist2 }}</td>
+	  </tr>	  
+
+    </table>
+
+   </div>     
+
+   <br /><br /><Br /><Br /><Br /><br /><Br /><br /><br /><Br /><br /><br /><Br /><br /><br /><Br />
+
+   <div class="col-sm-2 champion">
+   
+    <h2 id="theChamp" style="color:gold;">CHAMPION</h2>
+	
+	<span id="champs"> {{ realChampion }} </span>
+   
+    <hr />
+
+   </div>     
+	
+  </div>
+  
+</div>
+
+<br />
+
+<span style="color:green;font-style:italic;">{{ matchStatus }}</span>
+<Br /><br /><Br /><Br />
+
+</body>
+</html>
